@@ -7,3 +7,11 @@
     z-index: 9999;
     background: url(../img/preloader.gif) center no-repeat #2a7fff;
 }
+
+.fondoBlanco{
+    background-color: #fff;
+}
+
+.fondoOscuro{
+    background-color: #424242;
+}
