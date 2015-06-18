@@ -17,6 +17,7 @@ body {
     padding: 0px !important;
     margin: 0px !important;
     font-size:13px;
+    height: 100%;
 }
 
 ul li {
@@ -765,7 +766,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 .ds {
 	background: #ffffff;
 	padding-top: 20px;
-      height: 100%;
+      height: 85%;
 }
 
 .ds h4 {
@@ -2242,9 +2243,12 @@ label {
 }
 
 .content-notification{
-height: 95%;
+
   overflow-y: auto;
   padding-bottom: 74px;
+
+    height: 87%;
+  
 }
 
 span.label-message {
