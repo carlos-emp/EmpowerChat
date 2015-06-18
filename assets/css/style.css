@@ -330,7 +330,7 @@ ul.sidebar-menu li ul.sub li.active a {
 
 ul.sidebar-menu li{
     /*line-height: 20px !important;*/
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     margin-left:2px;
     margin-right:0px;
 }
