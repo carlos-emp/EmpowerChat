@@ -225,7 +225,7 @@ ul.top-menu > li > .logout {
     width: 210px;
     height: 100%;
     position: fixed;
-    background: #424a5d;
+    background: #1e2431;
 }
 
 #sidebar h5 {
@@ -781,7 +781,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
   line-height: 60px;
   height: 60px;
   margin: 0;
-  background: none repeat scroll 0 0 #3A87AD;
+  background: none repeat scroll 0 0 #1D6AA9;
   text-align: center;
   font-weight: bold;
 }
