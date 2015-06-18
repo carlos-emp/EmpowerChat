@@ -78,7 +78,66 @@ ENTRA A CONSAOLA Y PEGALO
             showNotification(message);/*muestra las notificaciones*/
         });
 
+        /*onbtengo todos los datos chats en grupos*/
+        var myDataRefGroupChat = new Firebase('https://chatgroupempowerlabs.firebaseio.com/');
+
+
+        myDataRefGroupChat.on('child_added', function(snapshot) {
+    
+            var message = snapshot.val();
+            listOfChatGroup.push(message);
+            showchatUserSelectGroup();
+            showNotificationGroup(message);/*muestra las notificaciones de los grupos*/
+        });
+
     });
+
+
+
+
+
+/*funcion para mostrar las notificaciones de grupos luna */
+    function  showNotificationGroup(message_notification){
+
+        var time_=jQuery.timeago(message_notification.datetime);/*obtengo el valor del tiempo en texto*/
+        var isNotification=false;
+        message_notification.userSend.UserGroup.forEach(function(item_){
+            if(JSON.parse($.session.get("ObjectUser")).email==item_.email)
+            {
+                isNotification=true;
+                return;
+            }
+        });
+
+        if(isNotification && message_notification.name.email!=JSON.parse($.session.get("ObjectUser")).email)
+        {
+
+            var name=message_notification.userSend.Name;
+            if(name.length>12)
+            {
+                name=name.substring(0,13)+"...";
+            }
+
+            $("#notificationGroup-"+message_notification.name.id).remove();
+            var inyectData='<div class="desc Group" id="notificationGroup-'+message_notification.userSend.id+'" data-id="'+message_notification.userSend.id+'">'+
+                '<div class="thumb">'+
+                '<span class="badge bg-theme"><i class="icon-group"></i></span>'+
+                '</div>'+
+                '<div class="details">'+
+                '<p><muted>'+time_+'</muted><br/>'+
+                '<a >'+name+'</a><br>'+message_notification.message+'<br/>'+
+                '</p>'+
+                '</div>'+
+                '</div>';
+
+
+            $(".content-notification").prepend(inyectData);
+             var objectEventClick = $($(".content-notification .Group").children()[$(".content-notification .Group").children().length-1]);
+             
+             eventClickChatUserGroup(objectEventClick);
+        }
+
+    }
 
 
  /*function create group*/
@@ -105,6 +164,7 @@ ENTRA A CONSAOLA Y PEGALO
       if(selectUserGroup)
       {
         $(".close").click();
+        listUserGroup.push(JSON.parse($.session.get("ObjectUser")));
         createGroup(listUserGroup,nameGroup);
         showError.addClass("hide");
       }else{
@@ -150,9 +210,9 @@ function createGroup(listUserGroup,nameGroup)
             }
 
             $("#notification-"+message_notification.name.id).remove();
-            var inyectData='<div class="desc" id="notification-'+message_notification.name.id+'" data-email="'+message_notification.name.email+'">'+
+            var inyectData='<div class="desc chat-user" id="notification-'+message_notification.name.id+'" data-email="'+message_notification.name.email+'">'+
                 '<div class="thumb">'+
-                '<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>'+
+                '<span class="badge bg-theme"><i class="icon-user"></i></span>'+
                 '</div>'+
                 '<div class="details">'+
                 '<p><muted>'+time_+'</muted><br/>'+
@@ -163,7 +223,7 @@ function createGroup(listUserGroup,nameGroup)
 
 
             $(".content-notification").prepend(inyectData);
-             var objectEventClick = $($(".content-notification").children()[$(".content-notification").children().length-1]);
+             var objectEventClick = $($(".content-notification .chat-user").children()[$(".content-notification .chat-user").children().length-1]);
              
              eventClickChatUser(objectEventClick);
         }
@@ -186,7 +246,14 @@ function createGroup(listUserGroup,nameGroup)
             $("#content-chat").removeClass("hide");
             $(".inyect-commit").html("");
             $("#chat-content").val("");
-            clickUserChat($(this).attr("data-email"));
+
+            var email_=$(this).attr("data-email");
+            if(typeof(email_)=="undefined")
+            {
+                email_=$(this).parent().attr("data-email");
+            }
+            //.parent()
+            clickUserChat(email_);
             /*userChat  tengo el usuario que se le dio click*/
             /*Se necesitan eliminar las notificaciones*/
             $("#notification-"+userChat.id).remove();
@@ -209,6 +276,22 @@ function createGroup(listUserGroup,nameGroup)
       });
       $(".inyect-commit").scrollTo(10000,0)/*mejorar la parte del scroll*/
     }
+
+
+/*funcion para mostrar los chats correspondientes al grupo seleccionado*/
+    function showchatUserSelectGroup(){
+      if(userChat==null)
+        {return;}
+      $(".inyect-commit").html("");
+      listOfChatGroup.forEach(function(message){/*recorro todos los chats*/
+        if(userChat.id==message.userSend.id){
+
+            eventAddChatGroup(message);
+          }
+      });
+      $(".inyect-commit").scrollTo(10000,0)/*mejorar la parte del scroll*/
+    }
+
 
     /*funcion para mandar un chat a una persona correspondiete*/
     function sendChat(message_)
@@ -257,6 +340,23 @@ function createGroup(listUserGroup,nameGroup)
     }
 
 
+    /*funcion para mandar un chat a un grupo de personas correspondiete*/
+    function sendChatGroup(message_)
+    {
+        var myDataRef = new Firebase('https://chatgroupempowerlabs.firebaseio.com/');
+        /*formato de fecha 2014-02-20T12:29:45*/
+        if(userChat!=null)
+        {
+            myDataRef.push({name: JSON.parse($.session.get("ObjectUser")), message: message_ , userSend: userChat,datetime:moment().format()});
+            $('#chat-content').val("");
+        }else{
+
+            alert("Necesitas seleccionar el usuario a quien mandar el mensaje");
+            $('#chat-content').val(message_);
+        }
+    }
+
+
     /*Obtengo todos los grupos*/
     function getUsergroup(){
         var myDataRef=new Firebase('https://groupempowerlabs.firebaseio.com/');
@@ -282,7 +382,7 @@ function createGroup(listUserGroup,nameGroup)
     function showUserGroup(UserGroup){
         var codeInyection='<li class="sub-menu  chat-group" data-id="'+UserGroup.id+'">'+
             '<a href="javascript:;" >'+
-            '<i class="fa fa-desktop"></i>'+
+            '<i class="fa icon-group"></i>'+
             '<span>'+UserGroup.Name+'</span>'+
             '</a>'+
             '</li>';
@@ -303,12 +403,18 @@ function createGroup(listUserGroup,nameGroup)
             $("#content-chat").removeClass("hide");
             $(".inyect-commit").html("");
             $("#chat-content").val("");
-            clickUserChatGroup($(this).attr("data-id"));
-            /*userChat  tengo el usuario que se le dio click*/
+
+            var id_=$(this).attr("data-id");
+            if(typeof(id_)=="undefined")
+            {
+                id_=$(this).parent().attr("data-id");
+            }
+
+            clickUserChatGroup(id_);
             /*Se necesitan eliminar las notificaciones de los grupos*/
-            /*$("#notification-"+userChat.id).remove();*/
-            /*ahora necesitas mostrar los chats correspondientes*/
-           // showchatUserSelect();
+            $("#notificationGroup-"+id_).remove();
+            /*ahora necesitas mostrar los chats correspondientes al grupo*/
+            showchatUserSelectGroup();
         });
     }
 
@@ -322,8 +428,9 @@ function createGroup(listUserGroup,nameGroup)
         }
         var name="";
         objectUser.UserGroup.forEach(function(item_){
-            name+=item_.Name+" ,";
+            name+=item_.Name+" , ";
         });
+        name=name.substring(0,name.length-3);/*quita la utlima coma para que no aparesca*/
         $("#header-chat").text(name);
     }
 
@@ -363,7 +470,7 @@ function createGroup(listUserGroup,nameGroup)
     function showUserConnect(userConnect){
         var codeInyection='<li class="sub-menu" data-email="'+userConnect.email+'">'+
             '<a href="javascript:;" >'+
-            '<i class="fa fa-desktop"></i>'+
+            '<i class="fa icon-user"></i>'+
             '<span>'+userConnect.Name+'</span>'+
             '</a>'+
             '</li>';
@@ -420,16 +527,20 @@ function createGroup(listUserGroup,nameGroup)
 
                     if(attrs.action==="chat")
                     {
+                        var message=$("#chat-content").val().trim();
                         if(!selectGroup)
                         {/*esto es si es solo un chat directo con otra persona*/
-                            var message=$("#chat-content").val().trim();
+                            
                             if(message.length>0)
                             {
                                 sendChat(message);
 
                             }
                         }else{
-                            alert("chat grupal  NO funcional jijijijj :)");
+                            if(message.length>0)
+                            {
+                                sendChatGroup(message);
+                            }
                         }
                     }
 
@@ -493,6 +604,58 @@ function createGroup(listUserGroup,nameGroup)
 
     }
 
+
+
+    /*evento para agregar un chat del grupo seleccioado*/
+    function eventAddChatGroup(data){
+
+
+        var time_=jQuery.timeago(data.datetime);/*obtengo el valor del tiempo en texto*/
+        var inyectHTML="";
+
+        var message=data.message;
+        var emoticons = {
+          ':)'  : '1-feliz.gif',
+          ':('  : 'enfadado.gif'
+        }, url = "emoticonos/";
+        // a simple regex to match the characters used in the emoticons
+        message = message.replace(/[:\-)(D]+/g, function (match) {
+          return typeof emoticons[match] != 'undefined' ?
+                 '<img src="'+url+emoticons[match]+'" width="20px"/>' :
+                 match;
+        });
+
+
+          
+
+
+        if(data.name.email==JSON.parse($.session.get("ObjectUser")).email)
+        {
+            inyectHTML='<div class="mensaje-autor">'+/*Mensaje del usuario que inició sesión*/
+                '<img width="50" src="https://desk-cdn.s3.amazonaws.com/unknown.png" class="img-circle"> '+/*Foto de perfil*/
+                '<div class="flecha-derecha"></div>'+/* <!--Mensaje Alineado a la Izquierda-->*/
+                '<div class="contenido">'+
+                message+ /*<!--Mensaje-->*/
+                '</div>'+
+                '<div class="fecha">'+time_+'</div>'+/* <!--Hora-->*/
+                '</div>';
+        }else{
+            inyectHTML='<div class="mensaje-amigo">'+ <!--Mensaje de otro contactol-->
+                '<div class="contenido">'+
+                    message+/* <!--Mensaje-->*/
+                    '</div>'+
+                    '<div class="flecha-izquierda"></div>'+/* <!--Mensaje Alineado a la Izquierda-->*/
+                    '<img width="50" src="https://desk-cdn.s3.amazonaws.com/unknown.png" class="img-circle">'+/* <!--Foto de perfil-->*/
+                    '<div class="fecha">'+time_+'  -  <span class="user-message"  style="color: rgb(32, 200, 162);font-weight: bold;">'+data.name.Name+'</span></div>'/* <!--Hora-->*/
+                '</div>';
+        }
+
+
+
+        $(".inyect-commit").append(inyectHTML);
+        $("#commit-content").val("");
+
+    }
 
 
 
