@@ -275,7 +275,10 @@ ul.sidebar-menu , ul.sidebar-menu li ul.sub{
 }
 
 ul.sidebar-menu {
-    margin-top: 75px;
+    /*margin-top: 75px;*/
+    height: 81%;
+  overflow-y: auto;
+  margin-bottom: 15px;
 }
 
 #sidebar > ul > li > ul.sub {
