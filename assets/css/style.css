@@ -35,7 +35,7 @@ a, a:hover, a:focus {
 
 /* Bootstrap Modifications */
 .modal-header {
-	background: #68dff0;
+	background: #1D6AA9;
 }
 
 .modal-title {
@@ -205,16 +205,16 @@ hr {
 }
 
 ul.top-menu > li > .logout {
-	color: #f2f2f2;
-	font-size: 12px;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border: 1px solid #64c3c2 !important;
-	padding: 5px 15px;
-	margin-right: 15px;
-	background: #68dff0;
-	margin-top: 15px;
-      cursor: pointer;
+	  color: white;
+  font-size: 12px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.7);
+  padding: 5px 15px;
+  margin-right: 15px;
+  background: #6a7a99;
+  margin-top: 3px;
+  cursor: pointer;
 }
 
 
@@ -276,8 +276,7 @@ ul.sidebar-menu , ul.sidebar-menu li ul.sub{
 
 ul.sidebar-menu {
     /*margin-top: 75px;*/
-    height: 81%;
-  overflow-y: auto;
+   
   margin-bottom: 15px;
 }
 
@@ -359,7 +358,7 @@ ul.sidebar-menu li a{
 }
 
 ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-    background: #68dff0;
+    background: none repeat scroll 0 0 rgba(0,0,0,0.2);
     color: #fff;
     display: block;
 
@@ -368,7 +367,7 @@ ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:fo
     -o-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
-      border-left: 2px solid rgb(153, 27, 65);
+      border-left: 3px solid #D75533;
         cursor: pointer;
 }
 
@@ -430,6 +429,7 @@ a.logo {
     float: left;
     margin-top: 15px;
     text-transform: uppercase;
+      padding-right: 50px;
 }
 
 a.logo b {
@@ -476,7 +476,7 @@ ul.top-menu > li > a {
 
 ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     border:1px solid #b6b6b6 !important;
-    background-color: transparent !important;
+    /*background-color: transparent !important;*/
     border-color: #b6b6b6 !important;
     text-decoration: none;
     border-radius: 4px;
@@ -774,14 +774,15 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .ds h3 {
-	color: #ffffff;
-	font-size: 16px;
-	padding: 0 10px;
-	line-height: 60px;
-	height: 60px;
-	margin: 0;
-	background: #68DFF0;
-	text-align: center;
+	color: white;
+  font-size: 16px;
+  padding: 0 10px;
+  line-height: 60px;
+  height: 60px;
+  margin: 0;
+  background: none repeat scroll 0 0 #3A87AD;
+  text-align: center;
+  font-weight: bold;
 }
 
 .ds i {
@@ -818,14 +819,14 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .ds p > muted {
-	font-size: 9px;
+	font-size: 10px;
 	text-transform: uppercase;
 	font-style: italic;
 	color: #666666
 }
 
 .ds a {
-	color: #68dff0;
+	color: #000000;
 }
 
 /* LINE ICONS CONFIGURATION */
@@ -2244,4 +2245,8 @@ label {
 height: 95%;
   overflow-y: auto;
   padding-bottom: 74px;
+}
+
+span.label-message {
+  PADDING-LEFT: 16px;
 }

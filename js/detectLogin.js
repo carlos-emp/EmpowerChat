@@ -16,6 +16,11 @@
         /*obtengo los valores*/
         var email_user_=$.session.get("EmailUser");
         var password_user_=$.session.get("PasswordUser");
+        if(typeof($.session.get("ObjectUser"))=="undefined")
+        {
+            window.location="chat-login.html" ;
+            $.session.delete("EmailUser");
+        }
         var Object_user_=JSON.parse($.session.get("ObjectUser"));
         if(typeof(email_user_)=='string' && typeof(password_user_)=="string")
         {

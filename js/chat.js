@@ -139,7 +139,7 @@ usersRef.remove();
             $("#notificationGroup-"+message_notification.name.id).remove();
             var inyectData='<div class="desc Group" id="notificationGroup-'+message_notification.userSend.id+'" data-id="'+message_notification.userSend.id+'">'+
                 '<div class="thumb">'+
-                '<span class="badge bg-theme"><i class="icon-group"></i></span>'+
+                '<span class="badge " style="margin-top: 13px;"><i class="icon-group"></i></span>'+
                 '</div>'+
                 '<div class="details">'+
                 '<p><muted>'+time_+'</muted><br/>'+
@@ -255,7 +255,7 @@ function createGroup(listUserGroup,nameGroup)
             $("#notification-"+message_notification.name.id).remove();
             var inyectData='<div class="desc chat-user" id="notification-'+message_notification.name.id+'" data-email="'+message_notification.name.email+'">'+
                 '<div class="thumb">'+
-                '<span class="badge bg-theme"><i class="icon-user"></i></span>'+
+                '<span class="badge " style="margin-top: 13px;"><i class="icon-user"></i></span>'+
                 '</div>'+
                 '<div class="details">'+
                 '<p><muted>'+time_+'</muted><br/>'+
