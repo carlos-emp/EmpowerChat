@@ -13,6 +13,11 @@ PAra actualizar ne firebase elimina el usuario
 var usersRef = ref.child("-Js5xXsykMRwVtW0-yXk");
 usersRef.remove();
 
+
+'https://chatempowelabs.firebaseio.com/'
+'https://chatgroupempowerlabs.firebaseio.com/'
+'https://groupempowerlabs.firebaseio.com/
+ 'https://userempowerlabs.firebaseio.com/''
 */
 
     var listOfUsers = [];/*lista de usuarios*/
