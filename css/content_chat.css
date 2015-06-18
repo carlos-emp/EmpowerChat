@@ -154,10 +154,9 @@ body::-webkit-scrollbar {
 
 
 .text-commit{
-    width: 100%;
-    padding-top: 9px;
-    margin-bottom: 8px;
-    resize:none;
+      width: 98%;
+  resize: none;
+  margin: 8px;
 }
 
 

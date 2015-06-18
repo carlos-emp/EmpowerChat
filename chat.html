@@ -1,5 +1,4 @@
-﻿
-<!-- Alejandro Luna Hernández  y Carlos Vázquez--> 
+﻿<!-- Alejandro Luna Hernández  y Carlos Vázquez--> 
 <html lang="en" ng-app="chat"> 
     <head> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" > 
@@ -46,7 +45,7 @@ TOP BAR CONTENT & NOTIFICATIONS
                 <a  class="logo"><img src="img/sin-bordes.png" width="130px" alt=""></a>
                 <!--logo end-->
                 <ul class="nav pull-left top-menu margin-left">
-                    <li><a class="logout" data-toggle="modal" data-target="#myGroup"><span class="icon-user-plus"></span><span class="hidden-xs"> Crear Grupo</span></a></li>
+                    <li><a class="logout" data-toggle="modal" data-target="#myGroup" ng-click="showCreateUser()"><span class="icon-user-plus"></span><span class="hidden-xs"> Crear Grupo</span></a></li>
                 </ul>
 
                 <div class="nav notify-row" id="top_menu">
@@ -106,12 +105,16 @@ MAIN SIDEBAR MENU
 *********************************************************************************************************************************************************** -->
             <!--sidebar start-->
             <aside>
-                <div id="sidebar"  class="nav-collapse ">
+                <div id="sidebar"  class="nav-collapse " style="padding-top: 72px;padding-bottom: 0px !important;">
                     <!-- sidebar menu start-->
-                    <ul class="sidebar-menu" id="nav-accordion">
-
+                    <ul class="sidebar-menu">
                         <p class="centered"><img src="assets/img/ui-zac.jpg" class="img-circle" width="80"></p>
                         <h5 class="centered email-user">Alejandro Luna Hernández</h5>
+                    </ul>
+
+                    <ul class="sidebar-menu" id="nav-accordion">
+                        
+                        
 
 
 
@@ -263,7 +266,6 @@ RIGHT SIDEBAR CONTENT
                     // (string | optional) the class name you want to apply to that specific message
                     class_name: 'my-sticky-class'
                 });
-
                 return false;
             });
         </script>
@@ -277,5 +279,3 @@ RIGHT SIDEBAR CONTENT
 
     </body>
 </html>
-
-

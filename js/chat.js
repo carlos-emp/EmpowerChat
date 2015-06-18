@@ -8,6 +8,11 @@ var myDataRef = new Firebase('https://userempowerlabs.firebaseio.com/');
 myDataRef.push({name:"Alejandro Luna Hernández",email:"alejandroisel@gmail.com",password:"123",id:1});
 ENTRA A CONSAOLA Y PEGALO
 
+
+PAra actualizar ne firebase elimina el usuario
+var usersRef = ref.child("-Js5xXsykMRwVtW0-yXk");
+usersRef.remove();
+
 */
 
     var listOfUsers = [];/*lista de usuarios*/
@@ -57,9 +62,21 @@ ENTRA A CONSAOLA Y PEGALO
         }
 
         $scope.createGroup = function(){
-            creatGroupChat();
+            
+                creatGroupChat();
+            
         }
 
+        $scope.showCreateUser = function(){/*funcion para cambiar el texto */
+            selectGroup=false;
+            $(".modal-footer").find("div").text("Crear Grupo")
+            $(".modal-title").text("Crear nuevo grupo");
+            $("#nombre-grupo").val("");
+            noCheckUser();
+        }
+
+            
+       
        
 
 
@@ -85,6 +102,7 @@ ENTRA A CONSAOLA Y PEGALO
         myDataRefGroupChat.on('child_added', function(snapshot) {
     
             var message = snapshot.val();
+            message.key=snapshot.key();
             listOfChatGroup.push(message);
             showchatUserSelectGroup();
             showNotificationGroup(message);/*muestra las notificaciones de los grupos*/
@@ -96,7 +114,7 @@ ENTRA A CONSAOLA Y PEGALO
 
 
 
-/*funcion para mostrar las notificaciones de grupos luna */
+/*funcion para mostrar las notificaciones de grupos  */
     function  showNotificationGroup(message_notification){
 
         var time_=jQuery.timeago(message_notification.datetime);/*obtengo el valor del tiempo en texto*/
@@ -121,7 +139,7 @@ ENTRA A CONSAOLA Y PEGALO
             $("#notificationGroup-"+message_notification.name.id).remove();
             var inyectData='<div class="desc Group" id="notificationGroup-'+message_notification.userSend.id+'" data-id="'+message_notification.userSend.id+'">'+
                 '<div class="thumb">'+
-                '<span class="badge bg-theme"><i class="icon-group"></i></span>'+
+                '<span class="badge " style="margin-top: 13px;"><i class="icon-group"></i></span>'+
                 '</div>'+
                 '<div class="details">'+
                 '<p><muted>'+time_+'</muted><br/>'+
@@ -139,6 +157,16 @@ ENTRA A CONSAOLA Y PEGALO
 
     }
 
+
+/*fucntion no check en input*/
+function noCheckUser(){
+    var userGoup=$($("#integrantes").find("input"));
+     for(var i=0;i< userGoup.length;i++)
+      {
+              userGoup[i].checked=false;
+             
+      }
+ }
 
  /*function create group*/
  function creatGroupChat(){
@@ -165,6 +193,7 @@ ENTRA A CONSAOLA Y PEGALO
       {
         $(".close").click();
         listUserGroup.push(JSON.parse($.session.get("ObjectUser")));
+
         createGroup(listUserGroup,nameGroup);
         showError.addClass("hide");
       }else{
@@ -183,14 +212,28 @@ ENTRA A CONSAOLA Y PEGALO
 function createGroup(listUserGroup,nameGroup)
     {
         var myDataRef = new Firebase('https://groupempowerlabs.firebaseio.com/');
+
+        
+
         /*guarda el nuevo nombre del grupo*/
           var id_=listOfUsersGroup.length;
-          if(id_==0 || id_==1)/*para que no empieze con un id=0*/
-          {
-            id_++;
-          }
+          id_++;
+
+          if(selectGroup)
+        {/*significa que fue una actualización*/
+            var usersRef = myDataRef.child(userChat.key);
+            usersRef.remove();
+            id_=userChat.id;
+        }
+
+
             myDataRef.push({group: listUserGroup, id: id_, name: nameGroup});
             $("#nombre-grupo").val("");
+
+            if(selectGroup)
+            {
+                $($($("#nav-accordion")).find("li.chat-group[data-id="+id_+"]")).click();
+            }
         
     }
 
@@ -212,7 +255,7 @@ function createGroup(listUserGroup,nameGroup)
             $("#notification-"+message_notification.name.id).remove();
             var inyectData='<div class="desc chat-user" id="notification-'+message_notification.name.id+'" data-email="'+message_notification.name.email+'">'+
                 '<div class="thumb">'+
-                '<span class="badge bg-theme"><i class="icon-user"></i></span>'+
+                '<span class="badge " style="margin-top: 13px;"><i class="icon-user"></i></span>'+
                 '</div>'+
                 '<div class="details">'+
                 '<p><muted>'+time_+'</muted><br/>'+
@@ -316,6 +359,7 @@ function createGroup(listUserGroup,nameGroup)
 
             $("#nav-accordion").find("li").remove();/*limpio los usuario que estan mostrandose en el lateral izquierdo*/
             $("#integrantes").find("li").remove();/*limpio los usuario que estan mostrandose en el modal*/
+            listOfUsers=[];
             nameSnapshot.forEach(function(item_){
                 var nameSnapshott = item_.val();//obtengo los objetos 
                 var addUser = new Object();
@@ -363,10 +407,11 @@ function createGroup(listUserGroup,nameGroup)
         
         myDataRef.on('value', function(nameSnapshot) {
             $("#nav-accordion").find("li.chat-group").remove()
-            
+            listOfUsersGroup=[];
             nameSnapshot.forEach(function(item_){
                 var nameSnapshott = item_.val();//obtengo los objetos 
                 var addUser = new Object();
+                addUser.key=item_.key();
                 addUser.UserGroup=nameSnapshott.group;
                 addUser.id=nameSnapshott.id;
                 addUser.Name=nameSnapshott.name;
@@ -383,13 +428,46 @@ function createGroup(listUserGroup,nameGroup)
         var codeInyection='<li class="sub-menu  chat-group" data-id="'+UserGroup.id+'">'+
             '<a href="javascript:;" >'+
             '<i class="fa icon-group"></i>'+
-            '<span>'+UserGroup.Name+'</span>'+
+            '<span>'+UserGroup.Name+'</span> &nbsp;'+
+            '<i class="fa icon-settings" style=" float: right; padding-right: 16px;" data-toggle="modal" data-target="#myGroup" data-id="'+UserGroup.id+'"></i>'+
             '</a>'+
             '</li>';
         /*se usa prepend por que se necesita meter todos los usuarios posibles por conectar */
         $("#nav-accordion").append(codeInyection);
         var objectEventClick=$($("#nav-accordion").children()[$("#nav-accordion").children().length-1]);
+        var eventSetting=$(objectEventClick.find("i.icon-settings"));
         eventClickChatUserGroup(objectEventClick);//agrega elk evento de click
+        clickupdateGroup(eventSetting);
+    }
+
+    /*funcion para el evnto de actualizar el grupo*/
+
+    function clickupdateGroup(eventSetting){
+
+
+        eventSetting.click(function() {
+            var id_=$(this).attr("data-id");/*obtengo el id de grupo que se le dio click*/
+            var objectUser=getUserObjectGroup(id_);
+            $("#nombre-grupo").val(objectUser.Name);
+            $(".modal-title").text("Actualizar grupo");
+            $(".modal-footer").find("div").text("Actualizar Grupo")
+
+            var userGoup=$($("#integrantes").find("input"));
+            noCheckUser();//quita la seleccion de todo
+             for(var i=0;i< userGoup.length;i++)
+              {
+                for (var j = 0; j < objectUser.UserGroup.length; j++) {
+                    if($(userGoup[i]).attr("data-email")==objectUser.UserGroup[j].email)
+                    {
+                        userGoup[i].checked=true;
+                    }
+                };
+                      
+                     
+              }
+
+
+        });
         
     }
 
