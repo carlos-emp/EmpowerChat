@@ -141,8 +141,8 @@ usersRef.remove();
                 name=name.substring(0,13)+"...";
             }
 
-            $("#notificationGroup-"+message_notification.name.id).remove();
-            var inyectData='<div class="desc Group" id="notificationGroup-'+message_notification.userSend.id+'" data-id="'+message_notification.userSend.id+'">'+
+            $("#notificationGroup-"+message_notification.userSend.id).remove();
+            var inyectData='<div class="desc Group Notification-Group" id="notificationGroup-'+message_notification.userSend.id+'" data-id="'+message_notification.userSend.id+'">'+
                 '<div class="thumb">'+
                 '<span class="badge " style="margin-top: 13px;"><i class="icon-group"></i></span>'+
                 '</div>'+
@@ -154,8 +154,8 @@ usersRef.remove();
                 '</div>';
 
 
-            $(".content-notification").prepend(inyectData);
-             var objectEventClick = $($(".content-notification .Group").children()[$(".content-notification .Group").children().length-1]);
+            $(".content-notification").append(inyectData);
+             var objectEventClick = $($(".content-notification .Notification-Group").children()[$(".content-notification .Group").children().length-1]);
              
              eventClickChatUserGroup(objectEventClick);
         }
@@ -270,7 +270,7 @@ function createGroup(listUserGroup,nameGroup)
                 '</div>';
 
 
-            $(".content-notification").prepend(inyectData);
+            $(".content-notification").append(inyectData);
              var objectEventClick = $($(".content-notification .chat-user").children()[$(".content-notification .chat-user").children().length-1]);
              
              eventClickChatUser(objectEventClick);
