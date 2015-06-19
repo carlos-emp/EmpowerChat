@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="assets/css/bootstrap.css">
     </head>
     <body>
-        <div id='messagesDiv'></div>
+       
         <div class="container">
 
 
@@ -30,7 +30,14 @@
                 <div class="tab-content fondoBlanco">
                     <div role="tabpanel" class="tab-pane active fondoOscuro" id="home">
 
-                        <form class="form-signin">
+                        <div id='messagesDiv'></div>
+
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane fondoOscuro" id="profile">
+                        
+                        
+                         <form class="form-signin">
 
                             <h2 class="form-signin-heading text-title-align title-login">Registro de Usuarios </h2><br>
 
@@ -54,10 +61,8 @@
                             <div class="btn  btn-info btn-block" ng-click="Login()" id="btnRegister"><span class="icon-user"></span>Registrar</div>
                         </form>
 
-
-
+                        
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="profile">v:</div>
                     <div role="tabpanel" class="tab-pane" id="messages">...</div>
                     <div role="tabpanel" class="tab-pane" id="settings">...</div>
                 </div>
