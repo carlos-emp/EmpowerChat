@@ -12,38 +12,41 @@
         <link rel="stylesheet" href="assets/css/bootstrap.css">
     </head>
     <body>
-       
+
         <div class="container">
+            <div class="text-center colorBlanco">
+                <h3>Panel de Administrador</h3><br>
+            </div>
 
 
             <div>
 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs fondoBlanco" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Usuarios</a></li>
+                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Registrar</a></li>
+                    <!--<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>-->
                 </ul>
 
                 <!-- Tab panes -->
-                <div class="tab-content fondoBlanco">
-                    <div role="tabpanel" class="tab-pane active fondoOscuro" id="home">
-
+                <div class="tab-content fondoOscuro">
+                    <div role="tabpanel" class="tab-pane active row padding-min tab" id="home">
+                        <br>
                         <div id='usersDiv'></div>
 
 
                     </div>
-                    <div role="tabpanel" class="tab-pane fondoOscuro" id="profile">
-                        
-                        
-                         <form class="form-signin">
+                    <div role="tabpanel" class="tab-pane  padding-min " id="profile">
 
-                            <h2 class="form-signin-heading text-title-align title-login">Registro de Usuarios </h2><br>
+
+                        <form class="form-signin">
+
+                            <h4 class="form-signin-heading text-title-align title-login">Registro de Usuarios </h4><br>
 
                             <div align="center">
 
-                                <img src="img/icono-round.png" class="img-responsive" width="90px" alt="">
+                                <img src="img/icono.png" class="img-responsive" width="90px" alt="">
 
                             </div>
 
@@ -57,13 +60,13 @@
                                 <option value="administrador">Administrador</option>
                             </select>
                             <input class="form-control" placeholder="Contraseña" id="passwordInput"  required="" type="password">
-                            
-                            
 
-                            <div class="btn  btn-info btn-block" ng-click="Login()" id="btnRegister"><span class="icon-user"></span>Registrar</div>
+
+
+                            <div class="btn  btn-primary form-control fondoAzul" id="btnRegister"><span class="icon-user"></span>Registrar</div>
                         </form>
 
-                        
+
                     </div>
                     <div role="tabpanel" class="tab-pane" id="messages">...</div>
                     <div role="tabpanel" class="tab-pane" id="settings">...</div>
@@ -76,9 +79,10 @@
         <script>
             var myDataRef = new Firebase('https://userempowerlabs.firebaseio.com');
             var idNuevo=0;
+            var contacto="";
             $('#btnRegister').click(function () {
 
-               
+
                 var email = $('#emailInput').val();
                 var name = $('#nameInput').val();
                 var role = $('#roleInput').val();
@@ -87,17 +91,31 @@
                 myDataRef.push({email: email, id:id, name: name, password: password, rol: role});
                 $('#messageInput').val('');
                 alert("Usuario Registrado");
-                
+
 
             });
             myDataRef.on('child_added', function(snapshot) {
                 var user = snapshot.val();
-                displayChatMessage(user.email,user.id,user.name, user.password);
+                displayChatMessage(user.email,user.id,user.name, user.password, user.rol);
             });
-            function displayChatMessage(email, id ,name, password) {
-                $('<div/>').text(email).prepend($('<em/>').text(name+': ')).appendTo($('#usersDiv'));
+            function displayChatMessage(email, id ,name, password, rol) {
+
+
+                contacto+='<div class="col-xs-12 col-sm-6 col-md-4"><div class="fondoAzul colorBlanco" align="center">'+
+                    email+
+                    '</div>'+
+                    '<div class="fondoBlanco padding-min"><b>ID:</b> ' +
+                    id+'<br><b>Nombre:</b> '+name+'<br><b>Rol: </b>'+rol+
+                    '</div><br></div>';
+
+
+
+
+                $('#usersDiv').append(contacto);
+
                 $('#usersDiv')[0].scrollTop = $('#usersDiv')[0].scrollHeight;
                 idNuevo++;
+                contacto="";
             };
         </script>
 

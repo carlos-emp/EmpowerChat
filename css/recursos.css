@@ -1,4 +1,7 @@
-.carga {
+html,body { height:100%; }
+
+
+}.carga {
     position: fixed;
     left: 0px;
     top: 0px;
@@ -15,3 +18,23 @@
 .fondoOscuro{
     background-color: #424242;
 }
+
+.fondoAzul{
+    background-color: #144d89;
+}
+
+.padding-min{
+    padding: 5px;
+}
+
+.colorBlanco{
+    color:#fff;
+}
+
+.tab{
+    height: 72vh;
+    bottom:0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
