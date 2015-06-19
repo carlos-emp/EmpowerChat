@@ -98,6 +98,30 @@ TOP BAR CONTENT & NOTIFICATIONS
 
                     </div>
                 </div>
+                
+                
+                <div class="modal fade" id="myInfo" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Editar mi información</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="error text-title-align alert alert-info hide " role="alert">  </div>
+                                <input type="text" id="nombre-grupo" name="nombre-grupo" placeholder="Nombre del grupo" class="form-control form-group">
+                                <div name="integrantes" id="integrantes" class="scroll"   ng-enter="doAction()"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="btn btn-info" ng-click="createGroup()">Crear Grupo</div>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
 
             </div>
 
@@ -115,7 +139,7 @@ MAIN SIDEBAR MENU
                       
 
                             
-                            <li class="sub-menu" data-toggle="modal" data-target="#myGroup">
+                            <li class="sub-menu" data-toggle="modal" data-target="#myInfo">
             <a href="javascript:;" >
             <i class="fa icon-pencil"></i>
             <span>Editar</span>
