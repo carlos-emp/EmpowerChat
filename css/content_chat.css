@@ -239,7 +239,7 @@ span.name {
 
 }
 #chat #header-chat{
-    background-color: #7E737B;
+    background-color: #313231;/*#7E737B;*/
     color: white;
     padding: 10px;
     text-align: center;
@@ -285,7 +285,7 @@ span.name {
     vertical-align: top;
 }
 #chat #mensajes .mensaje-autor .contenido{
-    background-color: #3990BF;
+    background-color: #2C90B5;/*#3990BF;*/
     color:#fff;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -309,13 +309,13 @@ span.name {
 }
 #chat #mensajes .mensaje-autor .flecha-derecha{
     display: inline-block;
-    margin-right: -6px;
+   /* margin-right: -6px;*/
     margin-top: 7px;
     width: 0; 
     height: 0; 
     border-top: 0px solid transparent;
     border-bottom: 10px solid transparent;
-    border-right: 15px solid #3990BF;
+    border-right: 15px solid #2C90B5;/*15px solid #3990BF;*/
 
 }
 
@@ -325,7 +325,7 @@ span.name {
 }
 
 #chat #mensajes .mensaje-amigo .contenido{
-    background-color: #c6c6c6;
+    background-color: rgba(59, 153, 187, 0.36);/*#c6c6c6;*/
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -341,13 +341,13 @@ span.name {
 }
 #chat #mensajes .mensaje-amigo .flecha-izquierda{
     display: inline-block;
-    margin-left: -6px;
+    /*margin-left: -6px;*/
     margin-top: 7px;
     width: 0; 
     height: 0; 
     border-top: 0px solid transparent;
     border-bottom: 10px solid transparent;
-    border-left: 15px solid #c6c6c6;
+    border-left: 15px solid rgba(59, 153, 187, 0.36);/*15px solid #c6c6c6;*/
 }
 
 #chat #mensajes .mensaje-amigo .fecha{
