@@ -26,7 +26,7 @@
                     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Usuarios</a></li>
                     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Registrar</a></li>
                     <!--<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>-->
+<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>-->
                 </ul>
 
                 <!-- Tab panes -->
@@ -91,6 +91,11 @@
                 myDataRef.push({email: email, id:id, name: name, password: password, rol: role});
                 $('#messageInput').val('');
                 alert("Usuario Registrado");
+                $('#emailInput').val("");
+                $('#nameInput').val("");
+                $('#roleInput').val("Seleccione Rol");
+                $('#passwordInput').val("");
+
 
 
             });
