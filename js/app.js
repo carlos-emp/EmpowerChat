@@ -5,11 +5,7 @@
   var todosPAP={};
   var module = angular.module('app', ['onsen']);
 
-var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-if(!is_chrome)
-{
-    alert("Tu navegador no es chrome te sugerimos que bajes chrome para una mejor navegación");
-}
+
   
 
   module.controller('AppController', function($scope, $data) {
