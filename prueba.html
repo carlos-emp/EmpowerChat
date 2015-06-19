@@ -30,7 +30,7 @@
                 <div class="tab-content fondoBlanco">
                     <div role="tabpanel" class="tab-pane active fondoOscuro" id="home">
 
-                        <div id='messagesDiv'></div>
+                        <div id='usersDiv'></div>
 
 
                     </div>
@@ -57,6 +57,8 @@
                                 <option value="administrador">Administrador</option>
                             </select>
                             <input class="form-control" placeholder="Contraseña" id="passwordInput"  required="" type="password">
+                            
+                            
 
                             <div class="btn  btn-info btn-block" ng-click="Login()" id="btnRegister"><span class="icon-user"></span>Registrar</div>
                         </form>
@@ -73,15 +75,19 @@
 
         <script>
             var myDataRef = new Firebase('https://userempowerlabs.firebaseio.com');
+            var idNuevo=0;
             $('#btnRegister').click(function () {
 
-                alert(":v");
+               
                 var email = $('#emailInput').val();
                 var name = $('#nameInput').val();
                 var role = $('#roleInput').val();
                 var password = $('#passwordInput').val();
-                myDataRef.push({email: email, name: name, password: password, rol: role});
+                var id = idNuevo+1
+                myDataRef.push({email: email, id:id, name: name, password: password, rol: role});
                 $('#messageInput').val('');
+                alert("Usuario Registrado");
+                
 
             });
             myDataRef.on('child_added', function(snapshot) {
@@ -89,8 +95,9 @@
                 displayChatMessage(user.email,user.id,user.name, user.password);
             });
             function displayChatMessage(email, id ,name, password) {
-                $('<div/>').text(email).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
-                $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+                $('<div/>').text(email).prepend($('<em/>').text(name+': ')).appendTo($('#usersDiv'));
+                $('#usersDiv')[0].scrollTop = $('#usersDiv')[0].scrollHeight;
+                idNuevo++;
             };
         </script>
 
