@@ -109,6 +109,7 @@ myDataRef.on('child_added', function(nameSnapshot) {
         addUser.id=nameSnapshott.id;
         addUser.email=nameSnapshott.email;
         addUser.rol=nameSnapshott.rol;
+        addUser.key=nameSnapshot.key();
         listOfUsers.push(addUser);
 
         } );
