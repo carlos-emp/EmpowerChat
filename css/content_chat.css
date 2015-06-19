@@ -38,6 +38,10 @@
     color:#bfbfbf;
 }
 
+.hide{
+    display:none;
+}
+
 .send-wrap
 {
     border-top: 1px solid #eee;

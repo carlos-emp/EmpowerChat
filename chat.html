@@ -98,6 +98,32 @@ TOP BAR CONTENT & NOTIFICATIONS
 
                     </div>
                 </div>
+                
+                
+                <div class="modal fade" id="myInfo" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Editar mi información</h4>
+                            </div>
+                            <div class="modal-body">
+                                
+                                <input type="text" id="nombre-usuario" name="nombre-usuario" placeholder="Nombre de usuario" class="form-control form-group">
+                                <input type="text" id="nombre-usuario" name="nombre-usuario" placeholder="Correo de usuario" class="form-control form-group">
+
+                               
+                            </div>
+                            <div class="modal-footer">
+                                <div class="btn btn-info" ng-click="createGroup()">Crear Grupo</div>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
 
             </div>
 
@@ -111,16 +137,21 @@ MAIN SIDEBAR MENU
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu">
                         <p class="centered"><img src="assets/img/ui-zac.jpg" class="img-circle" width="80"></p>
-                        <h5 class="centered email-user">Alejandro Luna Hernández</h5>
+                        <h5 class="centered email-user">Usuario</h5>
+                      
+
+                            
+                            <li class="sub-menu" data-toggle="modal" data-target="#myInfo">
+            <a href="javascript:;" >
+            <i class="fa icon-pencil"></i>
+            <span>Editar</span>
+            </a>
+            </li>
+                   
+                       
                     </ul>
 
                     <ul class="sidebar-menu" id="nav-accordion" style="height: 95% !important; overflow-y: auto;padding-bottom: 114px;">
-                        
-                        
-
-
-
-
 
                     </ul>
                     <!-- sidebar menu end-->
@@ -138,17 +169,17 @@ MAIN CONTENT
                     <div class="row">
                         <div class="col-lg-9 main-chart">
 
-                            <div class="panel panel-default hide" id="bienvenida" align="center">
-<h2>Bienvenido</h2>
-<img src="img/icono-round.png" width="200px"><br><br>
-<h3>Seleccione un contacto para comenzar</h3><br><br>
+                            <div class="panel panel-default" id="bienvenida" align="center">
+                                <h2>Bienvenido</h2>
+                                <img src="img/icono-round.png" width="200px"><br><br>
+                                <h3>Seleccione un contacto para comenzar</h3><br><br>
 
                             </div>
 
                             <div class="panel panel-default hide" id="content-chat"><!--Conten chat-->
 
 
- <div class="panel-header">
+                                <div class="panel-header">
                                     <textarea placeholder="Añadir un comentario" class="mentions-input text-commit" id="chat-content"   ng-enter="doAction()" DATA-ACTION="chat"   title="Enter para andar tu comentario"></textarea>
                                     <span class="label-message">Da enter para enviar tu comentario</span>
                                 </div>
@@ -167,16 +198,13 @@ MAIN CONTENT
                                         <div class="contact-str inyect-commit" id="mensajes">
 
 
-
-
-
                                         </div>
                                     </div>
 
 
                                 </div>
 
-                               
+
 
 
 
@@ -224,7 +252,7 @@ RIGHT SIDEBAR CONTENT
         <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
         <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-       
+
 
 
 
@@ -246,16 +274,20 @@ RIGHT SIDEBAR CONTENT
         <script src="js/library/timeago.js"></script>  
         <script type="text/javascript" src="js/library/emoticons.js"></script>
         <script src="js/chat.js"></script>  
+        
+<script>
+    
+    
+    
+</script>
 
 
 
 
-       
 
 
-       
+
 
 
     </body>
 </html>
-   

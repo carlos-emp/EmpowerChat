@@ -1,7 +1,7 @@
 (function(){
 
-    
-/*PARA CREAR UN NUEVO USUARIO
+
+    /*PARA CREAR UN NUEVO USUARIO
 
 var myDataRef = new Firebase('https://userempowerlabs.firebaseio.com/');
 
@@ -47,21 +47,21 @@ usersRef.remove();
     });
 
 
-        /*muestra el mensaje incial del chat*/
-          var unique_id = $.gritter.add({
-                    /*(string | mandatory) the heading of the notification*/
-                    title: 'Bienvenido!',
-                    /* (string | mandatory) the text inside the notification*/
-                    text: 'Bienvenidos al chat en tiempo real desarrollado por Empowerlabs <a href="http://empowerlabs.com/convocatoria-2015/" target="_blank" style="color:#ffd777">empowerlabs</a>.',
-                    /* (string | optional) the image to display on the left*/
-                    image: '',
-                    /*(bool | optional) if you want it to fade out on its own or just sit there*/
-                    sticky: true,
-                    /* (int | optional) the time you want it to be alive for before fading out*/
-                    time: '',
-                    /* (string | optional) the class name you want to apply to that specific message*/
-                    class_name: 'my-sticky-class'
-                });
+    /*muestra el mensaje incial del chat*/
+    var unique_id = $.gritter.add({
+        /*(string | mandatory) the heading of the notification*/
+        title: 'Bienvenido!',
+        /* (string | mandatory) the text inside the notification*/
+        text: 'Bienvenidos al chat en tiempo real desarrollado por <a href="http://empowerlabs.com/convocatoria-2015/" target="_blank" style="color:#ffd777">Empowerlabs</a>.',
+        /* (string | optional) the image to display on the left*/
+        image: '',
+        /*(bool | optional) if you want it to fade out on its own or just sit there*/
+        sticky: true,
+        /* (int | optional) the time you want it to be alive for before fading out*/
+        time: '',
+        /* (string | optional) the class name you want to apply to that specific message*/
+        class_name: 'my-sticky-class'
+    });
 
 
 
@@ -70,14 +70,14 @@ usersRef.remove();
     /*funcion parta quitar el mensaje de la parte superior derecha*/
     function intervalnoShowMessageInitial()
     {
-      setInterval(function () {$(".gritter-close").click()}, 1400);
+        setInterval(function () {$(".gritter-close").click()}, 1400);
     }
 
 
     /*obtengo todos los datos de el php y los muestro en pantalla*/
     module.controller('initializeChat', function($scope, $data, $http) {
 
-      
+
         intervalnoShowMessageInitial();/*quita el mensaje que se muestra ya que estorba */
 
 
@@ -87,9 +87,9 @@ usersRef.remove();
         }
 
         $scope.createGroup = function(){
-            
-                creatGroupChat();
-            
+
+            creatGroupChat();
+
         }
 
         $scope.showCreateUser = function(){/*funcion para cambiar el texto */
@@ -100,9 +100,9 @@ usersRef.remove();
             noCheckUser();
         }
 
-            
-       
-       
+
+
+
 
 
 
@@ -112,7 +112,7 @@ usersRef.remove();
 
 
         myDataRef.on('child_added', function(snapshot) {
-    
+
             var message = snapshot.val();
             listOfChat.push(message);
             /*eventAddChat(message);*/
@@ -125,7 +125,7 @@ usersRef.remove();
 
 
         myDataRefGroupChat.on('child_added', function(snapshot) {
-    
+
             var message = snapshot.val();
             message.key=snapshot.key();
             listOfChatGroup.push(message);
@@ -139,7 +139,7 @@ usersRef.remove();
 
 
 
-/*funcion para mostrar las notificaciones de grupos  */
+    /*funcion para mostrar las notificaciones de grupos  */
     function  showNotificationGroup(message_notification){
 
         var time_=jQuery.timeago(message_notification.datetime);/*obtengo el valor del tiempo en texto*/
@@ -175,76 +175,76 @@ usersRef.remove();
 
 
             $(".content-notification").append(inyectData);
-             var objectEventClick = $($(".content-notification .Notification-Group").children()[$(".content-notification .Group").children().length-1]);
-             
-             eventClickChatUserGroup(objectEventClick);
+            var objectEventClick = $($(".content-notification .Notification-Group").children()[$(".content-notification .Group").children().length-1]);
+
+            eventClickChatUserGroup(objectEventClick);
         }
 
     }
 
 
-/*fucntion no check en input*/
-function noCheckUser(){
-    var userGoup=$($("#integrantes").find("input"));
-     for(var i=0;i< userGoup.length;i++)
-      {
-              userGoup[i].checked=false;
-             
-      }
- }
+    /*fucntion no check en input*/
+    function noCheckUser(){
+        var userGoup=$($("#integrantes").find("input"));
+        for(var i=0;i< userGoup.length;i++)
+        {
+            userGoup[i].checked=false;
 
- /*function create group*/
- function creatGroupChat(){
-    var nameGroup=$("#nombre-grupo").val().trim();/*obtenemos el nombre del grupo*/
-    var showError=$(".error.alert");
-    if(nameGroup.length>0)/*valida el nombre del grupo*/
-    {
-      
-      var selectUserGroup=false;
-      userGoup=$($("#integrantes").find("input"));/*obtenemos a los integrantes del grupo*/
-      var listUserGroup = [];
-      for(var i=0;i< userGoup.length;i++)
-      {
-        if($(userGoup[i]).is(':checked'))/*checa que por lo menos uno de ellos sea seleccionado*/
-           {
-              userGoup[i].checked=false;
-              listUserGroup.push(getUserObject($(userGoup[i]).attr("data-email")));//almaceno el objeto dle usuario que se selecciono
-              selectUserGroup=true;
-            }
-      }
-
-      /*checa si se selecciono al gun usuario para el grupo*/
-      if(selectUserGroup)
-      {
-        $(".close").click();
-        listUserGroup.push(JSON.parse($.session.get("ObjectUser")));
-
-        createGroup(listUserGroup,nameGroup);
-        showError.addClass("hide");
-      }else{
-        showError.removeClass("hide");
-        showError.text("Necesitas seleccionar a los usuarios para el grupo");
-      }
-
-     /*$($("#integrantes").find("input")[0]).is(':checked')*/
-    }else{
-      
-      showError.removeClass("hide");
-      showError.text("Necesitas colocar el nombre del grupo");
+        }
     }
- }
-/*funcion que crea un grupo*/
-function createGroup(listUserGroup,nameGroup)
+
+    /*function create group*/
+    function creatGroupChat(){
+        var nameGroup=$("#nombre-grupo").val().trim();/*obtenemos el nombre del grupo*/
+        var showError=$(".error.alert");
+        if(nameGroup.length>0)/*valida el nombre del grupo*/
+        {
+
+            var selectUserGroup=false;
+            userGoup=$($("#integrantes").find("input"));/*obtenemos a los integrantes del grupo*/
+            var listUserGroup = [];
+            for(var i=0;i< userGoup.length;i++)
+            {
+                if($(userGoup[i]).is(':checked'))/*checa que por lo menos uno de ellos sea seleccionado*/
+                {
+                    userGoup[i].checked=false;
+                    listUserGroup.push(getUserObject($(userGoup[i]).attr("data-email")));//almaceno el objeto dle usuario que se selecciono
+                    selectUserGroup=true;
+                }
+            }
+
+            /*checa si se selecciono al gun usuario para el grupo*/
+            if(selectUserGroup)
+            {
+                $(".close").click();
+                listUserGroup.push(JSON.parse($.session.get("ObjectUser")));
+
+                createGroup(listUserGroup,nameGroup);
+                showError.addClass("hide");
+            }else{
+                showError.removeClass("hide");
+                showError.text("Necesitas seleccionar a los usuarios para el grupo");
+            }
+
+            /*$($("#integrantes").find("input")[0]).is(':checked')*/
+        }else{
+
+            showError.removeClass("hide");
+            showError.text("Necesitas colocar el nombre del grupo");
+        }
+    }
+    /*funcion que crea un grupo*/
+    function createGroup(listUserGroup,nameGroup)
     {
         var myDataRef = new Firebase('https://groupempowerlabs.firebaseio.com/');
 
-        
+
 
         /*guarda el nuevo nombre del grupo*/
-          var id_=listOfUsersGroup.length;
-          id_++;
+        var id_=listOfUsersGroup.length;
+        id_++;
 
-          if(selectGroup)
+        if(selectGroup)
         {/*significa que fue una actualización*/
             var usersRef = myDataRef.child(userChat.key);
             usersRef.remove();
@@ -252,17 +252,17 @@ function createGroup(listUserGroup,nameGroup)
         }
 
 
-            myDataRef.push({group: listUserGroup, id: id_, name: nameGroup});
-            $("#nombre-grupo").val("");
+        myDataRef.push({group: listUserGroup, id: id_, name: nameGroup});
+        $("#nombre-grupo").val("");
 
-            if(selectGroup)
-            {
-                $($($("#nav-accordion")).find("li.chat-group[data-id="+id_+"]")).click();
-            }
-        
+        if(selectGroup)
+        {
+            $($($("#nav-accordion")).find("li.chat-group[data-id="+id_+"]")).click();
+        }
+
     }
 
-    
+
     /*funcion para mostrar las notificaciones */
     function  showNotification(message_notification){
 
@@ -291,9 +291,9 @@ function createGroup(listUserGroup,nameGroup)
 
 
             $(".content-notification").append(inyectData);
-             var objectEventClick = $($(".content-notification .chat-user").children()[$(".content-notification .chat-user").children().length-1]);
-             
-             eventClickChatUser(objectEventClick);
+            var objectEventClick = $($(".content-notification .chat-user").children()[$(".content-notification .chat-user").children().length-1]);
+
+            eventClickChatUser(objectEventClick);
         }
 
     }
@@ -302,14 +302,14 @@ function createGroup(listUserGroup,nameGroup)
 
 
 
-/*evento para poder chatear con algun usuario*/
+    /*evento para poder chatear con algun usuario*/
     function eventClickChatUser(objectEventClick){
-      
-      objectEventClick.click(function(userConnect) {
+
+        objectEventClick.click(function(userConnect) {
             selectGroup=false;
             if($(this).hasClass("desc"))/*significa que es una notificación*/
             {
-              objectEventClick.remove();
+                objectEventClick.remove();
             }
             $("#content-chat").removeClass("hide");
             $(".inyect-commit").html("");
@@ -332,32 +332,33 @@ function createGroup(listUserGroup,nameGroup)
 
     /*funcion para mostrar los chats correspondientes al ausuario seleccionado*/
     function showchatUserSelect(){
-      if(userChat==null)
+        if(userChat==null)
         {return;}
-      /*eventAddChat(message);*/
-      $(".inyect-commit").html("");
-      listOfChat.forEach(function(message){
-        if((message.name.id==userChat.id && message.userSend.id==JSON.parse($.session.get("ObjectUser")).id) || (message.name.id==JSON.parse($.session.get("ObjectUser")).id && message.userSend.id==userChat.id)){
+        /*eventAddChat(message);*/
+        $(".inyect-commit").html("");
+        $("#bienvenida").hide();
+        listOfChat.forEach(function(message){
+            if((message.name.id==userChat.id && message.userSend.id==JSON.parse($.session.get("ObjectUser")).id) || (message.name.id==JSON.parse($.session.get("ObjectUser")).id && message.userSend.id==userChat.id)){
 
-            eventAddChat(message);
-          }
-      });
-      $(".inyect-commit").scrollTo(10000,0)/*mejorar la parte del scroll*/
+                eventAddChat(message);
+            }
+        });
+        $(".inyect-commit").scrollTo(10000,0)/*mejorar la parte del scroll*/
     }
 
 
-/*funcion para mostrar los chats correspondientes al grupo seleccionado*/
+    /*funcion para mostrar los chats correspondientes al grupo seleccionado*/
     function showchatUserSelectGroup(){
-      if(userChat==null)
+        if(userChat==null)
         {return;}
-      $(".inyect-commit").html("");
-      listOfChatGroup.forEach(function(message){/*recorro todos los chats*/
-        if(userChat.id==message.userSend.id){
+        $(".inyect-commit").html("");
+        listOfChatGroup.forEach(function(message){/*recorro todos los chats*/
+            if(userChat.id==message.userSend.id){
 
-            eventAddChatGroup(message);
-          }
-      });
-      $(".inyect-commit").scrollTo(10000,0)/*mejorar la parte del scroll*/
+                eventAddChatGroup(message);
+            }
+        });
+        $(".inyect-commit").scrollTo(10000,0)/*mejorar la parte del scroll*/
     }
 
 
@@ -406,7 +407,7 @@ function createGroup(listUserGroup,nameGroup)
                 }
             })
             getUsergroup();
-            
+
 
         } );
     }
@@ -432,7 +433,7 @@ function createGroup(listUserGroup,nameGroup)
     /*Obtengo todos los grupos*/
     function getUsergroup(){
         var myDataRef=new Firebase('https://groupempowerlabs.firebaseio.com/');
-        
+
         myDataRef.on('value', function(nameSnapshot) {
             $("#nav-accordion").find("li.chat-group").remove()
             listOfUsersGroup=[];
@@ -451,7 +452,7 @@ function createGroup(listUserGroup,nameGroup)
 
         } );
     }
-/*función para mostrar los grupos que estan dados de alta*/
+    /*función para mostrar los grupos que estan dados de alta*/
     function showUserGroup(UserGroup){
         var codeInyection='<li class="sub-menu  chat-group" data-id="'+UserGroup.id+'">'+
             '<a href="javascript:;" >'+
@@ -482,28 +483,28 @@ function createGroup(listUserGroup,nameGroup)
 
             var userGoup=$($("#integrantes").find("input"));
             noCheckUser();//quita la seleccion de todo
-             for(var i=0;i< userGoup.length;i++)
-              {
+            for(var i=0;i< userGoup.length;i++)
+            {
                 for (var j = 0; j < objectUser.UserGroup.length; j++) {
                     if($(userGoup[i]).attr("data-email")==objectUser.UserGroup[j].email)
                     {
                         userGoup[i].checked=true;
                     }
                 };
-                      
-                     
-              }
+
+
+            }
 
 
         });
-        
+
     }
 
 
-/*evento para poder chatear con usuario de un grupo*/
+    /*evento para poder chatear con usuario de un grupo*/
     function eventClickChatUserGroup(objectEventClick){
-      
-      objectEventClick.click(function(userConnect) {
+
+        objectEventClick.click(function(userConnect) {
             selectGroup=true;
 
             $("#content-chat").removeClass("hide");
@@ -561,13 +562,13 @@ function createGroup(listUserGroup,nameGroup)
 
     /*agrega los usuario al modal para crear un nuevo grupo*/
     function UseronGroup(addUser){
-      var codeInyection='<li class="sub-menu" data-email="'+addUser.email+'">'+
+        var codeInyection='<li class="sub-menu" data-email="'+addUser.email+'">'+
             '<a  >'+
             '<input type="checkbox" name="option2" value="user"  data-email="'+addUser.email+'"> '+
             '<span>'+addUser.Name+'</span>'+
             '</a>'+
             '</li>';
-       $("#integrantes").append(codeInyection);
+        $("#integrantes").append(codeInyection);
 
     }
 
@@ -584,7 +585,7 @@ function createGroup(listUserGroup,nameGroup)
         $("#nav-accordion").append(codeInyection);
         var objectEventClick=$($("#nav-accordion").children()[$("#nav-accordion").children().length-1]);
         eventClickChatUser(objectEventClick);//agrega elk evento de click
-        
+
     }
 
 
@@ -636,7 +637,7 @@ function createGroup(listUserGroup,nameGroup)
                         var message=$("#chat-content").val().trim();
                         if(!selectGroup)
                         {/*esto es si es solo un chat directo con otra persona*/
-                            
+
                             if(message.length>0)
                             {
                                 sendChat(message);
@@ -667,14 +668,14 @@ function createGroup(listUserGroup,nameGroup)
         var inyectHTML="";
 
         var message=data.message;
-        
-       var definition = {smile:{title:"Smile",codes:[":)",":=)",":-)"]},"sad-smile":{title:"Sad Smile",codes:[":(",":=(",":-("]},"big-smile":{title:"Big Smile",codes:[":D",":=D",":-D",":d",":=d",":-d"]},cool:{title:"Cool",codes:["8)","8=)","8-)","B)","B=)","B-)","(cool)"]},wink:{title:"Wink",codes:[":o",":=o",":-o",":O",":=O",":-O"]},crying:{title:"Crying",codes:[";(",";-(",";=("]},sweating:{title:"Sweating",codes:["(sweat)","(:|"]},speechless:{title:"Speechless",codes:[":|",":=|",":-|"]},kiss:{title:"Kiss",codes:[":*",":=*",":-*"]},"tongue-out":{title:"Tongue Out",codes:[":P",":=P",":-P",":p",":=p",":-p"]},blush:{title:"Blush",codes:["(blush)",":$",":-$",":=$",':">']},wondering:{title:"Wondering",codes:[":^)"]},sleepy:{title:"Sleepy",codes:["|-)","I-)","I=)","(snooze)"]},dull:{title:"Dull",codes:["|(","|-(","|=("]},"in-love":{title:"In love",codes:["(inlove)"]},"evil-grin":{title:"Evil grin",codes:["]:)",">:)","(grin)"]},talking:{title:"Talking",codes:["(talk)"]},yawn:{title:"Yawn",codes:["(yawn)","|-()"]},puke:{title:"Puke",codes:["(puke)",":&",":-&",":=&"]},"doh!":{title:"Doh!",codes:["(doh)"]},angry:{title:"Angry",codes:[":@",":-@",":=@","x(","x-(","x=(","X(","X-(","X=("]},"it-wasnt-me":{title:"It wasn't me",codes:["(wasntme)"]},party:{title:"Party!!!",codes:["(party)"]},worried:{title:"Worried",codes:[":S",":-S",":=S",":s",":-s",":=s"]},mmm:{title:"Mmm...",codes:["(mm)"]},nerd:{title:"Nerd",codes:["8-|","B-|","8|","B|","8=|","B=|","(nerd)"]},"lips-sealed":{title:"Lips Sealed",codes:[":x",":-x",":X",":-X",":#",":-#",":=x",":=X",":=#"]},hi:{title:"Hi",codes:["(hi)"]},call:{title:"Call",codes:["(call)"]},devil:{title:"Devil",codes:["(devil)"]},angel:{title:"Angel",codes:["(angel)"]},envy:{title:"Envy",codes:["(envy)"]},wait:{title:"Wait",codes:["(wait)"]},bear:{title:"Bear",codes:["(bear)","(hug)"]},"make-up":{title:"Make-up",codes:["(makeup)","(kate)"]},"covered-laugh":{title:"Covered Laugh",codes:["(giggle)","(chuckle)"]},"clapping-hands":{title:"Clapping Hands",codes:["(clap)"]},thinking:{title:"Thinking",codes:["(think)",":?",":-?",":=?"]},bow:{title:"Bow",codes:["(bow)"]},rofl:{title:"Rolling on the floor laughing",codes:["(rofl)"]},whew:{title:"Whew",codes:["(whew)"]},happy:{title:"Happy",codes:["(happy)"]},smirking:{title:"Smirking",codes:["(smirk)"]},nodding:{title:"Nodding",codes:["(nod)"]},shaking:{title:"Shaking",codes:["(shake)"]},punch:{title:"Punch",codes:["(punch)"]},emo:{title:"Emo",codes:["(emo)"]},yes:{title:"Yes",codes:["(y)","(Y)","(ok)"]},no:{title:"No",codes:["(n)","(N)"]},handshake:{title:"Shaking Hands",codes:["(handshake)"]},skype:{title:"Skype",codes:["(skype)","(ss)"]},heart:{title:"Heart",codes:["(h)","<3","(H)","(l)","(L)"]},"broken-heart":{title:"Broken heart",codes:["(u)","(U)"]},mail:{title:"Mail",codes:["(e)","(m)"]},flower:{title:"Flower",codes:["(f)","(F)"]},rain:{title:"Rain",codes:["(rain)","(london)","(st)"]},sun:{title:"Sun",codes:["(sun)"]},time:{title:"Time",codes:["(o)","(O)","(time)"]},music:{title:"Music",codes:["(music)"]},movie:{title:"Movie",codes:["(~)","(film)","(movie)"]},phone:{title:"Phone",codes:["(mp)","(ph)"]},coffee:{title:"Coffee",codes:["(coffee)"]},pizza:{title:"Pizza",codes:["(pizza)","(pi)"]},cash:{title:"Cash",codes:["(cash)","(mo)","($)"]},muscle:{title:"Muscle",codes:["(muscle)","(flex)"]},cake:{title:"Cake",codes:["(^)","(cake)"]},beer:{title:"Beer",codes:["(beer)"]},drink:{title:"Drink",codes:["(d)","(D)"]},dance:{title:"Dance",codes:["(dance)","\\o/","\\:D/","\\:d/"]},ninja:{title:"Ninja",codes:["(ninja)"]},star:{title:"Star",codes:["(*)"]},mooning:{title:"Mooning",codes:["(mooning)"]},finger:{title:"Finger",codes:["(finger)"]},bandit:{title:"Bandit",codes:["(bandit)"]},drunk:{title:"Drunk",codes:["(drunk)"]},smoking:{title:"Smoking",codes:["(smoking)","(smoke)","(ci)"]},toivo:{title:"Toivo",codes:["(toivo)"]},rock:{title:"Rock",codes:["(rock)"]},headbang:{title:"Headbang",codes:["(headbang)","(banghead)"]},bug:{title:"Bug",codes:["(bug)"]},fubar:{title:"Fubar",codes:["(fubar)"]},poolparty:{title:"Poolparty",codes:["(poolparty)"]},swearing:{title:"Swearing",codes:["(swear)"]},tmi:{title:"TMI",codes:["(tmi)"]},heidy:{title:"Heidy",codes:["(heidy)"]},myspace:{title:"MySpace",codes:["(MySpace)"]},malthe:{title:"Malthe",codes:["(malthe)"]},tauri:{title:"Tauri",codes:["(tauri)"]},priidu:{title:"Priidu",codes:["(priidu)"]}};
+
+        var definition = {smile:{title:"Smile",codes:[":)",":=)",":-)"]},"sad-smile":{title:"Sad Smile",codes:[":(",":=(",":-("]},"big-smile":{title:"Big Smile",codes:[":D",":=D",":-D",":d",":=d",":-d"]},cool:{title:"Cool",codes:["8)","8=)","8-)","B)","B=)","B-)","(cool)"]},wink:{title:"Wink",codes:[":o",":=o",":-o",":O",":=O",":-O"]},crying:{title:"Crying",codes:[";(",";-(",";=("]},sweating:{title:"Sweating",codes:["(sweat)","(:|"]},speechless:{title:"Speechless",codes:[":|",":=|",":-|"]},kiss:{title:"Kiss",codes:[":*",":=*",":-*"]},"tongue-out":{title:"Tongue Out",codes:[":P",":=P",":-P",":p",":=p",":-p"]},blush:{title:"Blush",codes:["(blush)",":$",":-$",":=$",':">']},wondering:{title:"Wondering",codes:[":^)"]},sleepy:{title:"Sleepy",codes:["|-)","I-)","I=)","(snooze)"]},dull:{title:"Dull",codes:["|(","|-(","|=("]},"in-love":{title:"In love",codes:["(inlove)"]},"evil-grin":{title:"Evil grin",codes:["]:)",">:)","(grin)"]},talking:{title:"Talking",codes:["(talk)"]},yawn:{title:"Yawn",codes:["(yawn)","|-()"]},puke:{title:"Puke",codes:["(puke)",":&",":-&",":=&"]},"doh!":{title:"Doh!",codes:["(doh)"]},angry:{title:"Angry",codes:[":@",":-@",":=@","x(","x-(","x=(","X(","X-(","X=("]},"it-wasnt-me":{title:"It wasn't me",codes:["(wasntme)"]},party:{title:"Party!!!",codes:["(party)"]},worried:{title:"Worried",codes:[":S",":-S",":=S",":s",":-s",":=s"]},mmm:{title:"Mmm...",codes:["(mm)"]},nerd:{title:"Nerd",codes:["8-|","B-|","8|","B|","8=|","B=|","(nerd)"]},"lips-sealed":{title:"Lips Sealed",codes:[":x",":-x",":X",":-X",":#",":-#",":=x",":=X",":=#"]},hi:{title:"Hi",codes:["(hi)"]},call:{title:"Call",codes:["(call)"]},devil:{title:"Devil",codes:["(devil)"]},angel:{title:"Angel",codes:["(angel)"]},envy:{title:"Envy",codes:["(envy)"]},wait:{title:"Wait",codes:["(wait)"]},bear:{title:"Bear",codes:["(bear)","(hug)"]},"make-up":{title:"Make-up",codes:["(makeup)","(kate)"]},"covered-laugh":{title:"Covered Laugh",codes:["(giggle)","(chuckle)"]},"clapping-hands":{title:"Clapping Hands",codes:["(clap)"]},thinking:{title:"Thinking",codes:["(think)",":?",":-?",":=?"]},bow:{title:"Bow",codes:["(bow)"]},rofl:{title:"Rolling on the floor laughing",codes:["(rofl)"]},whew:{title:"Whew",codes:["(whew)"]},happy:{title:"Happy",codes:["(happy)"]},smirking:{title:"Smirking",codes:["(smirk)"]},nodding:{title:"Nodding",codes:["(nod)"]},shaking:{title:"Shaking",codes:["(shake)"]},punch:{title:"Punch",codes:["(punch)"]},emo:{title:"Emo",codes:["(emo)"]},yes:{title:"Yes",codes:["(y)","(Y)","(ok)"]},no:{title:"No",codes:["(n)","(N)"]},handshake:{title:"Shaking Hands",codes:["(handshake)"]},skype:{title:"Skype",codes:["(skype)","(ss)"]},heart:{title:"Heart",codes:["(h)","<3","(H)","(l)","(L)"]},"broken-heart":{title:"Broken heart",codes:["(u)","(U)"]},mail:{title:"Mail",codes:["(e)","(m)"]},flower:{title:"Flower",codes:["(f)","(F)"]},rain:{title:"Rain",codes:["(rain)","(london)","(st)"]},sun:{title:"Sun",codes:["(sun)"]},time:{title:"Time",codes:["(o)","(O)","(time)"]},music:{title:"Music",codes:["(music)"]},movie:{title:"Movie",codes:["(~)","(film)","(movie)"]},phone:{title:"Phone",codes:["(mp)","(ph)"]},coffee:{title:"Coffee",codes:["(coffee)"]},pizza:{title:"Pizza",codes:["(pizza)","(pi)"]},cash:{title:"Cash",codes:["(cash)","(mo)","($)"]},muscle:{title:"Muscle",codes:["(muscle)","(flex)"]},cake:{title:"Cake",codes:["(^)","(cake)"]},beer:{title:"Beer",codes:["(beer)"]},drink:{title:"Drink",codes:["(d)","(D)"]},dance:{title:"Dance",codes:["(dance)","\\o/","\\:D/","\\:d/"]},ninja:{title:"Ninja",codes:["(ninja)"]},star:{title:"Star",codes:["(*)"]},mooning:{title:"Mooning",codes:["(mooning)"]},finger:{title:"Finger",codes:["(finger)"]},bandit:{title:"Bandit",codes:["(bandit)"]},drunk:{title:"Drunk",codes:["(drunk)"]},smoking:{title:"Smoking",codes:["(smoking)","(smoke)","(ci)"]},toivo:{title:"Toivo",codes:["(toivo)"]},rock:{title:"Rock",codes:["(rock)"]},headbang:{title:"Headbang",codes:["(headbang)","(banghead)"]},bug:{title:"Bug",codes:["(bug)"]},fubar:{title:"Fubar",codes:["(fubar)"]},poolparty:{title:"Poolparty",codes:["(poolparty)"]},swearing:{title:"Swearing",codes:["(swear)"]},tmi:{title:"TMI",codes:["(tmi)"]},heidy:{title:"Heidy",codes:["(heidy)"]},myspace:{title:"MySpace",codes:["(MySpace)"]},malthe:{title:"Malthe",codes:["(malthe)"]},tauri:{title:"Tauri",codes:["(tauri)"]},priidu:{title:"Priidu",codes:["(priidu)"]}};
 
         $.emoticons.define(definition);
 
         message=$.emoticons.replace(message);
 
-          
+
 
 
         if(data.name.email==JSON.parse($.session.get("ObjectUser")).email)
@@ -716,18 +717,18 @@ function createGroup(listUserGroup,nameGroup)
 
         var message=data.message;
         var emoticons = {
-          ':)'  : '1-feliz.gif',
-          ':('  : 'enfadado.gif'
+            ':)'  : '1-feliz.gif',
+            ':('  : 'enfadado.gif'
         }, url = "emoticonos/";
         // a simple regex to match the characters used in the emoticons
         message = message.replace(/[:\-)(D]+/g, function (match) {
-          return typeof emoticons[match] != 'undefined' ?
-                 '<img src="'+url+emoticons[match]+'" width="20px"/>' :
-                 match;
+            return typeof emoticons[match] != 'undefined' ?
+                '<img src="'+url+emoticons[match]+'" width="20px"/>' :
+            match;
         });
 
 
-          
+
 
 
         if(data.name.email==JSON.parse($.session.get("ObjectUser")).email)
@@ -754,6 +755,7 @@ function createGroup(listUserGroup,nameGroup)
 
 
         $(".inyect-commit").append(inyectHTML);
+        $("#bienvenida").addClass('hide');
         $("#commit-content").val("");
 
     }
