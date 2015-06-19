@@ -372,14 +372,17 @@ function createGroup(listUserGroup,nameGroup)
                 addUser.Password=nameSnapshott.password;
                 addUser.id=nameSnapshott.id;
                 addUser.email=nameSnapshott.email;
-
-                listOfUsers.push(addUser);
-                /*No muestres a tu usuario*/
-                if($.session.get("EmailUser")!=addUser.email)
+                addUser.rol=nameSnapshott.rol;
+                if(addUser.rol=="usuario") 
                 {
-                    showUserConnect(addUser);
-                    /*agregalo en el modal para crear un grupo*/
-                    UseronGroup(addUser);
+                    listOfUsers.push(addUser);
+                    /*No muestres a tu usuario*/
+                    if($.session.get("EmailUser")!=addUser.email)
+                    {
+                        showUserConnect(addUser);
+                        /*agregalo en el modal para crear un grupo*/
+                        UseronGroup(addUser);
+                    }
                 }
             })
             getUsergroup();
