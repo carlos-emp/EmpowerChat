@@ -17,7 +17,7 @@ usersRef.remove();
 'https://chatempowelabs.firebaseio.com/'
 'https://chatgroupempowerlabs.firebaseio.com/'
 'https://groupempowerlabs.firebaseio.com/
- 'https://userempowerlabs.firebaseio.com/''
+ 'https://userempowerlabs.firebaseio.com/'
 */
 
     var listOfUsers = [];/*lista de usuarios*/

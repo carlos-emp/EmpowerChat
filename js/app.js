@@ -112,6 +112,7 @@ myDataRef.on('child_added', function(nameSnapshot) {
         addUser.Password=nameSnapshott.password;
         addUser.id=nameSnapshott.id;
         addUser.email=nameSnapshott.email;
+        addUser.rol=nameSnapshott.rol;
         listOfUsers.push(addUser);
 
         } );
@@ -139,9 +140,19 @@ myDataRef.on('child_added', function(nameSnapshot) {
   /*obtengo los valores*/
   var email_user_=$.session.get("EmailUser");
   var password_user_=$.session.get("PasswordUser");
+   if(typeof($.session.get("ObjectUser"))=="undefined")
+        {
+            $.session.delete("EmailUser");
+        }
+        var Object_user_=JSON.parse($.session.get("ObjectUser"));
   if(typeof(email_user_)=='string' && typeof(password_user_)=='string')
   {
-   window.location="chat.html" ;
+      if(Object_user_.rol="usuario")
+      {
+        window.location="chat.html" ;
+      }else{
+        window.location="prueba.html";
+      }
   }
  }
   

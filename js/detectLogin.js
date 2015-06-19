@@ -24,7 +24,12 @@
         var Object_user_=JSON.parse($.session.get("ObjectUser"));
         if(typeof(email_user_)=='string' && typeof(password_user_)=="string")
         {
-            $(".email-user").text(Object_user_.Name)
+            if(Object_user_.rol=="usuario")
+            {
+                $(".email-user").text(Object_user_.Name)
+            }else{
+                window.location="prueba.html" ;
+            }
 
         }else{
             window.location="chat-login.html" ;
