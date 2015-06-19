@@ -63,19 +63,6 @@
     });
 
 
-    function UpdateUser(user){
-        var myDataRef = new Firebase('https://userempowerlabs.firebaseio.com'+user);
-        var email = $('#emailInput').val().trim();
-        var name = $('#nameInput').val().trim();
-        var password = $('#passwordInput').val().trim();
-        
-        if(validateEmail(email)){
-            if(name.length>0){
-                if(validate)
-            }
-        }
-    }
-
     /*funcion para el registro de un nuevo usuario*/
     function registerUSer(){
         var myDataRef = new Firebase('https://userempowerlabs.firebaseio.com');
