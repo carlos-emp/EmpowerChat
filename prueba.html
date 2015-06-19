@@ -7,37 +7,49 @@
         <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
         <link rel='stylesheet' type='text/css' href='/resources/tutorial/css/example.css'>
+        <link rel="stylesheet" href="css/content_chat.css">
         <link rel="stylesheet" href="css/recursos.css">
         <link rel="stylesheet" href="css/signin.css">
         <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="fonts/style.css">
     </head>
-    <body>
+    <body ng-controller="initializeChat">
 
         <div class="container">
-            <div class="text-center colorBlanco">
-                <h3>Panel de Administrador</h3><br>
+            <div class="fondoAzul colorBlanco padding-min">
+
+                <a  class="logo"><img src="img/sin-bordes.png" width="130px" alt=""></a>
+
             </div>
+
+
+
+
 
 
             <div>
 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs fondoBlanco" role="tablist">
+
                     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Usuarios</a></li>
                     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Registrar</a></li>
+                    <ul class="nav pull-right top-menu">
+                        <li><a class="boton logout btn btn-primary" ng-click="Logout()" ><span class="icon-exit"></span><span class="hidden-xs"> Cerrar sesión</span></a></li>
+                    </ul>
                     <!--<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
 <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>-->
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content fondoOscuro">
-                    <div role="tabpanel" class="tab-pane active row padding-min tab" id="home">
+                    <div role="tabpanel" class="tab-pane active  padding-min tab fade in" id="home">
                         <br>
                         <div id='usersDiv'></div>
 
 
                     </div>
-                    <div role="tabpanel" class="tab-pane  padding-min " id="profile">
+                    <div role="tabpanel" class="tab-pane  padding-min fade " id="profile">
 
 
                         <form class="form-signin">
@@ -46,7 +58,7 @@
 
                             <div align="center">
 
-                                <img src="img/icono.png" class="img-responsive" width="90px" alt="">
+                                <img src="img/icono.png" class="img-responsive" width="70px" alt="">
 
                             </div>
 
@@ -123,7 +135,9 @@
                 contacto="";
             };
         </script>
-
+        <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
+        <script src="angular/onsen/js/angular/angular.js"></script>   
+        <script src="js/chat.js"></script>
     </body>
 </html>

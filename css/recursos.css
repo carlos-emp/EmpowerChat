@@ -37,4 +37,12 @@ html,body { height:100%; }
     overflow-x: hidden;
     overflow-y: scroll;
 }
+.encabezado{
+    display: inline;
+    vertical-align: middle;
+}
 
+.boton{
+    background-color: #6A7A99;
+    color:#fff;
+}
