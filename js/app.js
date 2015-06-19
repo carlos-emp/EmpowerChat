@@ -147,7 +147,7 @@ myDataRef.on('child_added', function(nameSnapshot) {
       {
         window.location="chat.html" ;
       }else{
-        window.location="prueba.html";
+        window.location="admin.html";
       }
   }
  }

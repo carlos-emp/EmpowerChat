@@ -28,7 +28,7 @@
             {
                 $(".email-user").text(Object_user_.Name)
             }else{
-                window.location="prueba.html" ;
+                window.location="admin.html" ;
             }
 
         }else{

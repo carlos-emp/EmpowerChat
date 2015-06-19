@@ -1,23 +1,50 @@
 <!doctype html>
-<html>
+<html lang="en" ng-app="admin">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" > 
         <title>Prueba Usuarios</title>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-        <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-        <link rel='stylesheet' type='text/css' href='/resources/tutorial/css/example.css'>
+        <!--<link rel='stylesheet' type='text/css' href='/resources/tutorial/css/example.css'>-->
+
+        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/jquery-1.8.3.min.js"></script>
+        <script src="js/library/jquery.session.js"></script>
+        <script>
+                /*obtengo los valores para saber a donde tiene k estar logueado*/
+                var email_user_=$.session.get("EmailUser");
+                var password_user_=$.session.get("PasswordUser");
+                if(typeof($.session.get("ObjectUser"))=="undefined")
+                {
+                    window.location="chat-login.html" ;
+                    $.session.delete("EmailUser");
+                }
+                var Object_user_=JSON.parse($.session.get("ObjectUser"));
+                if(typeof(email_user_)=='string' && typeof(password_user_)=="string")
+                {
+                    if(Object_user_.rol=="usuario")
+                    {
+                        $(".email-user").text(Object_user_.Name)
+                    }
+
+                }else{
+                    window.location="chat-login.html" ;
+                }
+
+        </script>
+
+
         <link rel="stylesheet" href="css/content_chat.css">
         <link rel="stylesheet" href="css/recursos.css">
         <link rel="stylesheet" href="css/signin.css">
         <link rel="stylesheet" href="assets/css/bootstrap.css">
         <link rel="stylesheet" href="fonts/style.css">
-
+        
 
 
 
     </head>
-    <body ng-controller="initializeChat">
+    <body ng-controller="initializeadmin">
 
         <div class="container">
             <div class="fondoAzul colorBlanco padding-min">
@@ -65,6 +92,7 @@
                                 <img src="img/icono.png" class="img-responsive" width="70px" alt="">
 
                             </div>
+                             <div class="error text-title-align alert alert-info hide " role="alert" style="margin-top: 13px;margin-bottom: -5px !important;">  </div>
 
 
                             <br>
@@ -79,7 +107,7 @@
 
 
 
-                            <div class="btn  btn-primary form-control fondoAzul" id="btnRegister"><span class="icon-user"></span>Registrar</div>
+                            <div class="btn  btn-primary form-control fondoAzul" id="btnRegister" ng-click="register()"><span class="icon-user"></span>Registrar</div>
                         </form>
 
 
@@ -93,59 +121,15 @@
         </div> <!-- /container -->
 
         <script>
-            var myDataRef = new Firebase('https://userempowerlabs.firebaseio.com');
-            var idNuevo=0;
-            var contacto="";
-            $('#btnRegister').click(function () {
-
-
-                var email = $('#emailInput').val();
-                var name = $('#nameInput').val();
-                var role = $('#roleInput').val();
-                var password = $('#passwordInput').val();
-                var id = idNuevo+1
-                myDataRef.push({email: email, id:id, name: name, password: password, rol: role});
-                $('#messageInput').val('');
-                alert("Usuario Registrado");
-                $('#emailInput').val("");
-                $('#nameInput').val("");
-                $('#roleInput').val("Seleccione Rol");
-                $('#passwordInput').val("");
-
-
-
-            });
-            myDataRef.on('child_added', function(snapshot) {
-                var user = snapshot.val();
-                displayChatMessage(user.email,user.id,user.name, user.password, user.rol);
-            });
-            function displayChatMessage(email, id ,name, password, rol) {
-
-
-                contacto+='<div class="col-xs-12 col-sm-6 col-md-4"><div class="fondoAzul colorBlanco" align="center">'+
-                    email+
-                    '</div>'+
-                    '<div class="fondoBlanco padding-min"><b>ID:</b> ' +
-                    id+'<br><b>Nombre:</b> '+name+'<br><b>Rol: </b>'+rol+
-                    '</div><br></div>';
-
-
-
-
-                $('#usersDiv').append(contacto);
-
-                $('#usersDiv')[0].scrollTop = $('#usersDiv')[0].scrollHeight;
-                idNuevo++;
-                contacto="";
-            };
+            
+            
         </script>
         <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
-        <script src="angular/onsen/js/angular/angular.js"></script>   
+        <script src="angular/onsen/js/angular/angular.js"></script>    
+        <script src="angular/onsen/js/onsenui.js"></script>    
 
-        <script src="assets/js/jquery.js"></script>
-        <script src="assets/js/jquery-1.8.3.min.js"></script>
-        <script src="js/library/jquery.session.js"></script>
-        <script src="js/logout.js"></script>
+       
+        <script src="js/admin.js"></script>
     </body>
 </html>

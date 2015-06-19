@@ -47,6 +47,26 @@ usersRef.remove();
     });
 
 
+        /*muestra el mensaje incial del chat*/
+          var unique_id = $.gritter.add({
+                    /*(string | mandatory) the heading of the notification*/
+                    title: 'Bienvenido!',
+                    /* (string | mandatory) the text inside the notification*/
+                    text: 'Bienvenidos al chat en tiempo real desarrollado por Empowerlabs <a href="http://empowerlabs.com/convocatoria-2015/" target="_blank" style="color:#ffd777">empowerlabs</a>.',
+                    /* (string | optional) the image to display on the left*/
+                    image: '',
+                    /*(bool | optional) if you want it to fade out on its own or just sit there*/
+                    sticky: true,
+                    /* (int | optional) the time you want it to be alive for before fading out*/
+                    time: '',
+                    /* (string | optional) the class name you want to apply to that specific message*/
+                    class_name: 'my-sticky-class'
+                });
+
+
+
+
+
     /*funcion parta quitar el mensaje de la parte superior derecha*/
     function intervalnoShowMessageInitial()
     {
