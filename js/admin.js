@@ -105,12 +105,6 @@
     }
 
 
-    /*funcion para mostrar mensaje*/
-    function showMessage(message)
-    {
-        $(".error").text(message);
-        $(".error").removeClass("hide");
-    }
 
     /*función para validar que el correo no ha sido utilizado*/
     function validateUseEmail(validateEmail_){

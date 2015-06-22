@@ -91,6 +91,13 @@ usersRef.remove();
             creatGroupChat();
 
         }
+        
+           $scope.updateUser= function(){
+
+            updateUser();
+
+        }
+
 
         $scope.showCreateUser = function(){/*funcion para cambiar el texto */
             selectGroup=false;
@@ -784,6 +791,7 @@ usersRef.remove();
         if(typeof(email_user_)=='string' && typeof(password_user_)=="string")
         {
             $(".email-user").text(Object_user_.Name)
+           
 
         }else{
             window.location="chat-login.html";
@@ -801,3 +809,34 @@ usersRef.remove();
   $(window).load(function(){
         $('#myNotifications').modal('show');
     });
+    
+    
+    
+/*funcion para la edición de datos de un usuario*/
+    function updateUser(){
+    	
+    	
+        var myDataRef = new Firebase('https://userempowerlabs.firebaseio.com/'+JSON.parse($.session.get("ObjectUser")).key);
+        var email = $('#emailInput').val().trim();
+        var name = $('#nameInput').val().trim();
+        
+      
+        /*obtengo todos los valores*/
+
+       
+            if(name.length>0)
+                {
+
+                        $(".error").addClass("hide");
+                        myDataRef.update({ email: email, name: name });
+                        $('#messageInput').val('');
+                        showMessage("Información actualizada correctamente");
+                        $('#emailInput').val("");
+                        $('#nameInput').val("");
+                 
+                 
+                }else{
+                    showMessage("Necesita proporcionar el nombre del usuario");
+                }
+
+    }

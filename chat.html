@@ -45,9 +45,9 @@
                 <!--logo start-->
                 <a  class="logo"><img src="img/sin-bordes.png" width="130px" alt=""></a>
                 <!--logo end-->
-             
-                    <span class="btn btn-warning pull-right top-min " data-toggle="modal" data-target="#myNotifications"><span class="icon-notification"></span></span>
-              
+
+                <span class="btn btn-warning pull-right top-min " data-toggle="modal" data-target="#myNotifications"><span class="icon-notification"></span></span>
+
                 <div class="nav notify-row" id="top_menu">
                     <!--  notification start -->
                     <li  id="loader">
@@ -102,25 +102,25 @@
                                 <h4 class="modal-title">Editar mi información</h4>
                             </div>
                             <div class="modal-body">
+                                <div class="error text-title-align alert alert-info hide " role="alert" style="margin-top: 13px;margin-bottom: -5px !important;"></div>
 
-                                <input type="text" id="nombre-usuario" name="nombre-usuario" placeholder="Nombre de usuario" class="form-control form-group">
-                                <input type="text" id="nombre-usuario" name="nombre-usuario" placeholder="Correo de usuario" class="form-control form-group">
+                                <input type="text" id="nameInput" name="nombre-usuario" placeholder="Nombre de usuario" class="form-control form-group">
+                                <input type="text" id="emailInput" name="nombre-usuario" placeholder="Correo de usuario" class="form-control form-group">
 
                             </div>
                             <div class="modal-footer">
-                                <div class="btn btn-info" ng-click="">
+                                <div class="btn btn-info" ng-click="updateUser()">
                                     Actualizar
                                 </div>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                                    Cancelar
+                                    Cerrar
                                 </button>
                             </div>
                         </div>
 
                     </div>
                 </div>
-                
-                
+
                 <div class="modal fade" id="myNotifications" role="dialog">
                     <div class="modal-dialog">
 
@@ -133,10 +133,10 @@
                                 <h4 class="modal-title">Notificaciones</h4>
                             </div>
                             <div class="modal-body ds">
-                             <div class="content-notification" ></div>
+                                <div class="content-notification" ></div>
                             </div>
                             <div class="modal-footer">
-                                
+
                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                     Cerrar
                                 </button>
@@ -171,12 +171,6 @@
                         <li class="submenu" ng-click="Logout()">
                             <a href="javascript:;" ><i class="fa icon-exit"></i> <span> Cerrar sesión</span></a>
                         </li>
-
-                      
-                            
-                              
-                          
-                       
 
                     </ul>
 
@@ -242,11 +236,11 @@
                         RIGHT SIDEBAR CONTENT
                         *********************************************************************************************************************************************************** -->
 
-                     <!--    <div class="col-md-3 ds hidden-xs hidden-sm">
-                            COMPLETED ACTIONS DONUTS CHART
-                            <h3>Notificaciones</h3>
-                        
-                        <div class="content-notification"></div> 
+                        <!--    <div class="col-md-3 ds hidden-xs hidden-sm">
+                        COMPLETED ACTIONS DONUTS CHART
+                        <h3>Notificaciones</h3>
+
+                        <div class="content-notification"></div>
                         </div> --><!-- /col-lg-3 -->
                     </div>
                     <! --/row -->
@@ -281,9 +275,9 @@
         <script src="js/library/Moment.js"></script>
         <script src="js/library/timeago.js"></script>
         <script type="text/javascript" src="js/library/emoticons.js"></script>
-        <script src="js/chat.js"></script>
+        <script src="js/validaciones.js" type="text/javascript" charset="utf-8"></script>
 
-        <script></script>
+        <script src="js/chat.js"></script>
 
     </body>
 </html>
