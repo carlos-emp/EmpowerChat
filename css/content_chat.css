@@ -276,7 +276,7 @@ span.name {
     height: 58vh;
     width: 100%;
     max-width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
     overflow-y: scroll 
 }
 
@@ -405,9 +405,9 @@ myGroup{
 }
 
 .notificaciones{
-	max-height:70vh;
-	overflow: hidden;
-	overflow-y:scroll;
+	max-height:60vh;
+	overflow-x: hidden;
+	overflow-y:auto;
 }
 
 
