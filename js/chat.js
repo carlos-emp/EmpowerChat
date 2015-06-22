@@ -325,6 +325,7 @@ usersRef.remove();
             /*userChat  tengo el usuario que se le dio click*/
             /*Se necesitan eliminar las notificaciones*/
             $("#notification-"+userChat.id).remove();
+             $('#myNotifications').modal('hide');
             /*ahora necesitas mostrar los chats correspondientes*/
             showchatUserSelect();
         });
@@ -520,6 +521,7 @@ usersRef.remove();
             clickUserChatGroup(id_);
             /*Se necesitan eliminar las notificaciones de los grupos*/
             $("#notificationGroup-"+id_).remove();
+            $('#myNotifications').modal('hide');
             /*ahora necesitas mostrar los chats correspondientes al grupo*/
             showchatUserSelectGroup();
         });
@@ -677,7 +679,6 @@ usersRef.remove();
 
 
 
-
         if(data.name.email==JSON.parse($.session.get("ObjectUser")).email)
         {
             inyectHTML='<div class="mensaje-autor">'+/*Mensaje del usuario que inició sesión*/
@@ -793,3 +794,10 @@ usersRef.remove();
 
 
 })();
+
+
+/*Cargar Notificaciones*/
+
+  $(window).load(function(){
+        $('#myNotifications').modal('show');
+    });

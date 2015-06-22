@@ -399,5 +399,15 @@ myGroup{
     height: auto;
 }
 
+.top-min{
+	
+	margin-top:10px;
+}
+
+.modal-body.ds{
+	max-height:70vh;
+	overflow: hidden;
+	overflow-y:scroll;
+}
 
 
