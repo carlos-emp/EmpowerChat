@@ -404,7 +404,7 @@ myGroup{
 	margin-top:10px;
 }
 
-.modal-body.ds{
+.notificaciones{
 	max-height:70vh;
 	overflow: hidden;
 	overflow-y:scroll;
